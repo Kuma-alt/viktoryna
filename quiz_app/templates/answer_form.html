@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Додати відповідь</h2>
+    <form method="POST">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label for="answer_text" class="form-label">Текст відповіді</label>
+        <input type="text" class="form-control" id="answer_text" name="answer_text" required>
+      </div>
+      
+      <div class="mb-3">
+        <label for="is_correct" class="form-label">Чи є ця відповідь правильною?</label>
+        <select class="form-select" id="is_correct" name="is_correct" required>
+          <option value="True">Так</option>
+          <option value="False">Ні</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="question" class="form-label">Виберіть питання</label>
+        <select class="form-select" id="question" name="question" required>
+          <option value="" disabled selected>Оберіть питання</option>
+          {% for question in questions %}
+            <option value="{{ question.id }}">{{ question.text }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Додати відповідь</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Список вікторин</h2>
+  <ul class="list-group">
+    {% for quiz in quizzes %}
+      <li class="list-group-item">
+        <a href="{% url 'play_quiz' quiz.id 1 %}">{{ quiz.name }}</a>
+        <a class="btn btn-primary" href="{% url 'quiz_detail' quiz.id %}">Редагувати</a>
+        
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

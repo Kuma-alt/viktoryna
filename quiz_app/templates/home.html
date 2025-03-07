@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Quiz Site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        {% if user.is_authenticated %}
+            <h1>Welcome, {{ user.username }}!</h1>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            <h3>Your Quizzes</h3>
+            <ul>
+                {% for quiz in quizzes %}
+                    <li><a href="{% url 'quiz_detail' quiz.id %}">{{ quiz.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'quiz_create' %}" class="btn btn-primary">Create a New Quiz</a>
+        {% else %}
+            <h1>Welcome to the Quiz Site</h1>
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-success">Sign Up</a>
+        {% endif %}
+    </div>
+</body>
+</html>

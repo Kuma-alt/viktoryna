@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Результати вікторини: {{ quiz.name }}</h2>
+<p>Правильних відповідей: {{ correct_answers }} з {{ total_questions }}</p>
+<a href="{% url 'play_quiz' quiz.id 1 %}">Пройти ще раз</a>
+{% endblock %}

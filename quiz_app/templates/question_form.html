@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Додати питання</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label for="question_text" class="form-label">Текст питання</label>
+        <input type="text" class="form-control" id="question_text" name="question_text" required>
+      </div>
+      
+      <div class="mb-3">
+        <label for="question_image" class="form-label">Зображення (необов'язково)</label>
+        <input type="file" class="form-control" id="question_image" name="question_image">
+      </div>
+      
+      <div class="mb-3">
+        <label for="quiz" class="form-label">Виберіть вікторину</label>
+        <select class="form-select" id="quiz" name="quiz" required>
+          <option value="" disabled selected>Оберіть вікторину</option>
+          {% for quiz in quizzes %}
+            <option value="{{ quiz.id }}">{{ quiz.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Додати питання</button>
+    </form>
+  </div>
+{% endblock %}
